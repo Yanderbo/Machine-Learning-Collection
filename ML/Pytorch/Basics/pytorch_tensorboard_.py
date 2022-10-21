@@ -11,6 +11,8 @@ Got any questions leave a comment on youtube :)
 Programmed by Aladdin Persson <aladdin.persson at hotmail dot com>
 *    2020-04-17 Initial coding
 """
+#Pytorch 1.4.0
+#pip install tb-nightly
 
 # Imports
 import torch
@@ -58,13 +60,13 @@ num_epochs = 1
 
 # Load Data
 train_dataset = datasets.MNIST(
-    root="dataset/", train=True, transform=transforms.ToTensor(), download=True
+    root="MNIST_data", train=True, transform=transforms.ToTensor(), download=True
 )
 
 # To do hyperparameter search, include more batch_sizes you want to try
 # and more learning rates!
-batch_sizes = [256]
-learning_rates = [0.001]
+batch_sizes = [2]
+learning_rates = [0.1,0.01,0.001]
 classes = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
 for batch_size in batch_sizes:
@@ -75,12 +77,13 @@ for batch_size in batch_sizes:
         model.to(device)
         model.train()
         criterion = nn.CrossEntropyLoss()
+            #移动train_loader 因为每次batch_size 不一样
         train_loader = DataLoader(
             dataset=train_dataset, batch_size=batch_size, shuffle=True
         )
         optimizer = optim.Adam(model.parameters(), lr=learning_rate, weight_decay=0.0)
         writer = SummaryWriter(
-            f"runs/MNIST/MiniBatchSize {batch_size} LR {learning_rate}"
+            f"MNIST_data/MiniBatchSize {batch_size} LR {learning_rate}"
         )
 
         # Visualize model in TensorBoard
