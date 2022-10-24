@@ -27,6 +27,13 @@ from torch.utils.data import (
 )  # Gives easier dataset managment and creates mini batches
 from torch.utils.tensorboard import SummaryWriter  # to print to tensorboard
 
+
+
+# import tensorflow as tf
+# import tensorboard as tb
+# tf.io.gfile = tb.compat.tensorflow_stub.io.gfile
+
+
 # Simple CNN
 class CNN(nn.Module):
     def __init__(self, in_channels=1, num_classes=10):
@@ -60,13 +67,13 @@ num_epochs = 1
 
 # Load Data
 train_dataset = datasets.MNIST(
-    root="MNIST_data", train=True, transform=transforms.ToTensor(), download=True
+    root="MNIST_data/", train=True, transform=transforms.ToTensor(), download=True
 )
 
 # To do hyperparameter search, include more batch_sizes you want to try
 # and more learning rates!
 batch_sizes = [2]
-learning_rates = [0.1,0.01,0.001]
+learning_rates = [0.001]
 classes = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
 for batch_size in batch_sizes:
@@ -127,13 +134,13 @@ for batch_size in batch_sizes:
                     "Training Accuracy", running_train_acc, global_step=step
                 )
 
-                if batch_idx == 230:
-                    writer.add_embedding(
-                        features,
-                        metadata=class_labels,
-                        label_img=data,
-                        global_step=batch_idx,
-                    )
+                # if batch_idx == 230:
+                #     writer.add_embedding(
+                #         features,
+                #         metadata=class_labels,
+                #         label_img=data,
+                #         global_step=batch_idx,
+                #     )
                 step += 1
 
             writer.add_hparams(
