@@ -153,7 +153,7 @@ class conv_block(nn.Module):
         super(conv_block, self).__init__()
         self.relu = nn.ReLU()
         self.conv = nn.Conv2d(in_channels, out_channels, **kwargs)
-        self.batchnorm = nn.BatchNorm2d(out_channels)
+        self.batchnorm = nn.BatchNorm2d(out_channels)#数据归一化
 
     def forward(self, x):
         return self.relu(self.batchnorm(self.conv(x)))
