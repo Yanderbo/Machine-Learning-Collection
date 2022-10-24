@@ -1,13 +1,6 @@
-"""
-An implementation of LeNet CNN architecture.
-
-Video explanation: https://youtu.be/fcOW-Zyb5Bo
-Got any questions leave a comment on youtube :)
-
-Programmed by Aladdin Persson <aladdin.persson at hotmail dot com>
-*    2020-04-05 Initial coding
-
-"""
+#LeNet architecture
+#1×32×32 Input -> (5,5),s=1,p=0 -> avgpool s=2,p=0 -> (5,5),s=1,p=0 -> avgpool s=2,p=0 -> (5,5),s=1,p=0
+#channels:Conv:1->6->16->120 Linear:120->84->10
 
 import torch
 import torch.nn as nn  # All neural network modules, nn.Linear, nn.Conv2d, BatchNorm, Loss functions
